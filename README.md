@@ -1,0 +1,1 @@
+Deployment artifacts for Cloudflare. Business data and credentials are excluded. Source code is on the main branch. OCR assets are fetched from pinned upstream versions and verified against manifest hashes.

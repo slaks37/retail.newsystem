@@ -1,0 +1,149 @@
+{
+  "files": [
+    {
+      "path": "/assets/index-BK26qgGv.css",
+      "hash": "5e583ecf04b98bef29c9dbabf59520cc",
+      "size": 41845,
+      "contentType": "text/css",
+      "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/client/assets/index-BK26qgGv.css"
+    },
+    {
+      "path": "/assets/index-DSZYw5HE.js",
+      "hash": "2fb3ef0b70a94d7e0520bb89a0c29533",
+      "size": 341145,
+      "contentType": "application/javascript",
+      "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/client/assets/index-DSZYw5HE.js"
+    },
+    {
+      "path": "/assets/index-DgvX7Flt.js",
+      "hash": "b929ddb6730731c69a6ac4d131bdcd6d",
+      "size": 15829,
+      "contentType": "application/javascript",
+      "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/client/assets/index-DgvX7Flt.js"
+    },
+    {
+      "path": "/assets/pdf-B75MOh95.js",
+      "hash": "d38bfc275eff0bb1c4da507e11582b4e",
+      "size": 415929,
+      "contentType": "application/javascript",
+      "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/client/assets/pdf-B75MOh95.js"
+    },
+    {
+      "path": "/assets/pdf.worker.min-iDqQPrd3.mjs",
+      "hash": "52fadd5b81b6abd1eb665bab0c3749a8",
+      "size": 1232303,
+      "contentType": "application/javascript",
+      "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/client/assets/pdf.worker.min-iDqQPrd3.mjs"
+    },
+    {
+      "path": "/assets/preprocess.worker-BzfAfXuy.js",
+      "hash": "199f80410681684bc7f3e7200a08918d",
+      "size": 1215,
+      "contentType": "application/javascript",
+      "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/client/assets/preprocess.worker-BzfAfXuy.js"
+    },
+    {
+      "path": "/fonts.css",
+      "hash": "3945522c28912dbc769897af9865c181",
+      "size": 91,
+      "contentType": "text/css",
+      "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/client/fonts.css"
+    },
+    {
+      "path": "/index.html",
+      "hash": "47e5b5890b8751c2c8a0951092472be8",
+      "size": 415,
+      "contentType": "text/html",
+      "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/client/index.html"
+    },
+    {
+      "path": "/ocr/core/tesseract-core-lstm.wasm",
+      "hash": "220e2e87551edccb85519796a170469f",
+      "size": 2871085,
+      "contentType": "application/wasm",
+      "url": "https://unpkg.com/tesseract.js-core@6.1.2/tesseract-core-lstm.wasm"
+    },
+    {
+      "path": "/ocr/core/tesseract-core-lstm.wasm.js",
+      "hash": "775a35df6f2ae100e02609443e6bd5ca",
+      "size": 3954181,
+      "contentType": "application/javascript",
+      "url": "https://unpkg.com/tesseract.js-core@6.1.2/tesseract-core-lstm.wasm.js"
+    },
+    {
+      "path": "/ocr/core/tesseract-core-simd-lstm.wasm",
+      "hash": "187d76742dfc0d8929f0b49a619f145b",
+      "size": 2871377,
+      "contentType": "application/wasm",
+      "url": "https://unpkg.com/tesseract.js-core@6.1.2/tesseract-core-simd-lstm.wasm"
+    },
+    {
+      "path": "/ocr/core/tesseract-core-simd-lstm.wasm.js",
+      "hash": "9d7c43fb206dc9f48475228b46bf35f8",
+      "size": 3954569,
+      "contentType": "application/javascript",
+      "url": "https://unpkg.com/tesseract.js-core@6.1.2/tesseract-core-simd-lstm.wasm.js"
+    },
+    {
+      "path": "/ocr/core/tesseract-core-simd.wasm",
+      "hash": "ca11ee92a02023e4f5083eefd0966fb8",
+      "size": 3469078,
+      "contentType": "application/wasm",
+      "url": "https://unpkg.com/tesseract.js-core@6.1.2/tesseract-core-simd.wasm"
+    },
+    {
+      "path": "/ocr/core/tesseract-core-simd.wasm.js",
+      "hash": "3b0678c47a8dea6abb931b214171c08b",
+      "size": 4751193,
+      "contentType": "application/javascript",
+      "url": "https://unpkg.com/tesseract.js-core@6.1.2/tesseract-core-simd.wasm.js"
+    },
+    {
+      "path": "/ocr/core/tesseract-core.wasm",
+      "hash": "740f7e466a2f026e1f1e54a2e0d9957e",
+      "size": 3468788,
+      "contentType": "application/wasm",
+      "url": "https://unpkg.com/tesseract.js-core@6.1.2/tesseract-core.wasm"
+    },
+    {
+      "path": "/ocr/core/tesseract-core.wasm.js",
+      "hash": "e66872f6a76f5ad414d73d21512245df",
+      "size": 4750805,
+      "contentType": "application/javascript",
+      "url": "https://unpkg.com/tesseract.js-core@6.1.2/tesseract-core.wasm.js"
+    },
+    {
+      "path": "/ocr/lang/eng.traineddata.gz",
+      "hash": "ed350f3752f81ee8f38769edc14d92d9",
+      "size": 10923060,
+      "contentType": "application/gzip",
+      "url": "https://tessdata.projectnaptha.com/4.0.0/eng.traineddata.gz"
+    },
+    {
+      "path": "/ocr/lang/ind.traineddata.gz",
+      "hash": "46130be88c603e5a38e2fe5420540d87",
+      "size": 3847026,
+      "contentType": "application/gzip",
+      "url": "https://tessdata.projectnaptha.com/4.0.0/ind.traineddata.gz"
+    },
+    {
+      "path": "/ocr/worker.min.js",
+      "hash": "38645599043239c0eb6db08a6504a92d",
+      "size": 111162,
+      "contentType": "application/javascript",
+      "url": "https://unpkg.com/tesseract.js@6.0.1/dist/worker.min.js"
+    },
+    {
+      "path": "/ocr-sw.js",
+      "hash": "b6edf58a9445e81a85abc6c4e0fe398c",
+      "size": 699,
+      "contentType": "application/javascript",
+      "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/client/ocr-sw.js"
+    }
+  ],
+  "worker": {
+    "url": "https://raw.githubusercontent.com/slaks37/retail.newsystem/cloudflare-build/worker.js",
+    "hash": "d47d24adc8f354770955dc977aa46c0c",
+    "size": 485280
+  }
+}
