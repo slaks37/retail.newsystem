@@ -1,0 +1,26 @@
+{
+  "values": [
+    [
+      1,
+      "01/11/2026",
+      "01/11/2026",
+      "Supplier Contoh",
+      "TEST-INV-1",
+      "TOP 30 Hari",
+      1,
+      100000,
+      "contoh.jpg"
+    ],
+    [
+      2,
+      "01/11/2026",
+      "01/11/2026",
+      "Supplier Contoh",
+      "TEST-INV-2",
+      "Tunai",
+      1,
+      24000,
+      "contoh-2.jpg"
+    ]
+  ]
+}

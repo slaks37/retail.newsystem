@@ -1,0 +1,36 @@
+{
+  "values": [
+    [
+      1,
+      "01/11/2026",
+      "TEST-INV-1",
+      "Supplier Contoh",
+      "MASUK",
+      "TEST-SKU-001",
+      "Contoh produk",
+      10,
+      0,
+      "PCS",
+      10000,
+      0,
+      100000,
+      "contoh.jpg"
+    ],
+    [
+      2,
+      "01/11/2026",
+      "TEST-INV-2",
+      "Supplier Contoh",
+      "MASUK",
+      "TEST-SKU-002",
+      "Contoh produk dua",
+      5,
+      0,
+      "PCS",
+      5000,
+      0,
+      25000,
+      "contoh-2.jpg"
+    ]
+  ]
+}

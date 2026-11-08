@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env*
+.dev.vars*
+!.env.example
+.cloudflare/
+.wrangler/
+work/
+playwright-report/
+test-results/
+*.local.json
+# Business data stays in the database/private delivery, never a public repository.
+data/source-*.json
+public/ocr/
+.vercel/

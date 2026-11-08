@@ -1,0 +1,50 @@
+{
+  "name": "retail.newsystem",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "dev:local": "tsx scripts/local-server.ts",
+    "build": "tsc --noEmit && vite build && esbuild server/index.ts --bundle --format=esm --platform=browser --outfile=dist/worker.js",
+    "test": "vitest run",
+    "assets:ocr": "node scripts/prepare-ocr.mjs",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:import": "tsx scripts/import.ts",
+    "db:admin": "tsx scripts/admin.ts",
+    "deploy": "cf deploy --mode cloudflare",
+    "build:cloudflare": "tsc --noEmit && cf build --mode cloudflare",
+    "test:browser": "node scripts/check-ui.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "hono": "^4.10.0",
+    "idb-keyval": "^6.2.2",
+    "lucide-react": "^0.468.0",
+    "pdfjs-dist": "^5.4.394",
+    "pg": "^8.23.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tesseract.js": "^6.0.1",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^2.0.0-beta.v.12",
+    "@cloudflare/workers-types": "latest",
+    "@electric-sql/pglite": "^0.3.14",
+    "@hono/node-server": "^1.19.0",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.0.4",
+    "cf": "latest",
+    "esbuild": "^0.25.12",
+    "prettier": "^3.9.10",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vitest": "^3.2.4"
+  }
+}
