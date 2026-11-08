@@ -1,0 +1,1 @@
+CREATE TABLE account_setup_tokens(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),business_id uuid NOT NULL REFERENCES businesses,user_id uuid NOT NULL REFERENCES users,token_hash text NOT NULL UNIQUE,expires_at timestamptz NOT NULL,used_at timestamptz,created_at timestamptz NOT NULL DEFAULT now());

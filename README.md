@@ -4,6 +4,8 @@ Aplikasi operasional retail berbahasa Indonesia: katalog dan harga, POS, stok/op
 
 **Hosting:** Cloudflare Workers + Static Assets. **Database:** PostgreSQL di Neon. Vercel hanya dipakai jika database Neon dibuat melalui Marketplace; aplikasi tidak memerlukan hosting Vercel.
 
+Deployment aktif: [Buka New System](https://retail-newsystem.newsystem-sumberjago.workers.dev/). Akun pemilik dan data bisnis tidak disertakan di repository.
+
 ## Menjalankan secara lokal
 
 Node.js 24+, npm, dan browser modern. PostgreSQL lokal menggunakan PGlite untuk development, bukan database produksi.
@@ -48,6 +50,14 @@ node --env-file=.env.local --import tsx scripts/import.ts
 # ADMIN_EMAIL, ADMIN_NAME, ADMIN_PASSWORD ada di environment privat
 node --env-file=.env.local --import tsx scripts/admin.ts
 ```
+
+Jika koneksi TCP tidak tersedia, gunakan migrasi atomik melalui HTTP Neon:
+
+```bash
+node --env-file=.env.local --import tsx scripts/migrate-http.ts
+```
+
+Untuk membuat tautan aktivasi pemilik sekali pakai (48 jam), isi `APP_ORIGIN` dan jalankan `scripts/owner-link.ts` melalui `tsx` seperti script di atas. Tautan ditulis ke berkas privat, tidak dicetak ke log. Pemilik mengatur kata sandi sendiri di halaman aktivasi.
 
 `DATABASE_URL_UNPOOLED` dipakai migrasi melalui `pg`; aplikasi memakai `DATABASE_URL` dan HTTP driver Neon. Transaksi resmi berjalan di satu pemanggilan fungsi PostgreSQL, bukan beberapa permintaan HTTP terpisah.
 

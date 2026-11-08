@@ -25,7 +25,7 @@ export async function migrate(db: DB) {
 }
 // HTTP queries cannot keep session transactions; the CLI uses one atomic SQL batch per migration.
 export async function migratePostgres(connectionString: string) {
-  const client = new pg.Client({ connectionString });
+  const client = new pg.Client({ connectionString, connectionTimeoutMillis: 10000 });
   await client.connect();
   try {
     await migrate({

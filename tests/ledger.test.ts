@@ -5,7 +5,7 @@ import { migrate } from '../scripts/migrate';
 import { importData } from '../scripts/import-data';
 import { analyze } from '../server/analytics';
 import { app } from '../server/index';
-import { hashPassword } from '../server/auth';
+import { hashPassword, verifyPassword } from '../server/auth';
 let pg: PGlite;
 let db: DB;
 let b: string, loc: string, owner: string, cashier: string, supplier: string;
@@ -506,5 +506,70 @@ describe.sequential('Batas transaksi PostgreSQL', () => {
     );
     expect(r.status).toBe('paid');
     expect(Number(r.paid_amount)).toBe(200);
+  });
+  it('aktivasi pemilik mengatur password sekali tanpa membuka sesi anonim', async () => {
+    const token = 'ab'.repeat(32),
+      tokenHash = Array.from(
+        new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(token))),
+      )
+        .map((x) => x.toString(16).padStart(2, '0'))
+        .join('');
+    await query(
+      "INSERT INTO account_setup_tokens(business_id,user_id,token_hash,expires_at) VALUES($1,$2,$3,now()+interval '1 hour')",
+      [b, owner, tokenHash],
+    );
+    const env = {
+      LOCAL_DB: db,
+      DATABASE_URL: '',
+      SESSION_SECRET: 'test-only-secret',
+      BUSINESS_ID: b,
+      APP_ORIGIN: 'http://localhost:5173',
+    };
+    const request = () =>
+      app.request(
+        'http://localhost:5173/api/setup',
+        {
+          method: 'POST',
+          headers: { Origin: 'http://localhost:5173', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, password: 'password-new-owner-strong' }),
+        },
+        env,
+      );
+    const response = await request();
+    expect(response.status).toBe(200);
+    expect((await request()).status).toBe(400);
+    const [u] = await query<{ password_hash: string }>(
+      'SELECT password_hash FROM users WHERE id=$1',
+      [owner],
+    );
+    expect(await verifyPassword('password-new-owner-strong', u.password_hash)).toBe(true);
+  });
+  it('tautan aktivasi kedaluwarsa ditolak', async () => {
+    const token = 'cd'.repeat(32),
+      hash = Array.from(
+        new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(token))),
+      )
+        .map((x) => x.toString(16).padStart(2, '0'))
+        .join('');
+    await query(
+      "INSERT INTO account_setup_tokens(business_id,user_id,token_hash,expires_at) VALUES($1,$2,$3,now()-interval '1 hour')",
+      [b, owner, hash],
+    );
+    const response = await app.request(
+      'http://localhost:5173/api/setup',
+      {
+        method: 'POST',
+        headers: { Origin: 'http://localhost:5173', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, password: 'valid-strong-password' }),
+      },
+      {
+        LOCAL_DB: db,
+        DATABASE_URL: '',
+        SESSION_SECRET: 'test',
+        BUSINESS_ID: b,
+        APP_ORIGIN: 'http://localhost:5173',
+      },
+    );
+    expect(response.status).toBe(400);
   });
 });

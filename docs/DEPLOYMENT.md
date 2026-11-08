@@ -6,7 +6,7 @@ Buat project/database baru khusus New System. Jika melalui Vercel Marketplace, g
 
 Buat branch development untuk menguji migrasi. Simpan koneksi pooled di `DATABASE_URL` dan direct di `DATABASE_URL_UNPOOLED` pada `.env.local`. Jangan menempel credential di chat atau commit ke Git.
 
-Jalankan migrasi, impor privat opsional, dan pembuatan owner sesuai README. Script migrasi memakai koneksi direct `pg` dan transaction per berkas, sehingga DDL serta penanda migrasi tersimpan bersama. Pembuatan owner memakai password minimal 12 karakter dari environment.
+Jalankan migrasi, impor privat opsional, dan pembuatan owner sesuai README. Bila port TCP database diblokir, `scripts/migrate-http.ts` memakai batch `transaction()` Neon melalui HTTPS, satu transaksi per berkas. Splitter mempertahankan fungsi PL/pgSQL dan telah diuji pada PostgreSQL. Script migrasi memakai koneksi direct `pg` dan transaction per berkas, sehingga DDL serta penanda migrasi tersimpan bersama. Pembuatan owner memakai password minimal 12 karakter dari environment.
 
 ## 2. Cloudflare
 

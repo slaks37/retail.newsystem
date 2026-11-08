@@ -5,7 +5,7 @@ export default defineConfig({
     name: 'retail-newsystem',
     entrypoint: './server/index.ts',
     compatibilityDate: '2026-11-08',
-    assets: { notFoundHandling: 'single-page-application', runWorkerFirst: ['/api/*'] },
+    assets: { notFoundHandling: 'single-page-application', runWorkerFirst: true },
     env: {
       ASSETS: bindings.assets(),
       DATABASE_URL: bindings.secret(),

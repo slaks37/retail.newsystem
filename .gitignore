@@ -13,3 +13,4 @@ test-results/
 data/source-*.json
 public/ocr/
 .vercel/
+.vercel

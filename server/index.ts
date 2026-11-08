@@ -58,7 +58,7 @@ app.use('/api/*', async (c, next) => {
     if (!c.req.header('Content-Type')?.startsWith('application/json'))
       return c.json({ error: 'Gunakan JSON.' }, 415);
   }
-  if (c.req.path === '/api/login') return next();
+  if (['/api/login', '/api/setup'].includes(c.req.path)) return next();
   const session = await readSession(
     getCookie(c, 'ns_session') ?? '',
     c.env.SESSION_SECRET,
@@ -130,6 +130,29 @@ app.post('/api/login', async (c) => {
     path: '/',
     maxAge: 8 * 3600,
   });
+  return c.json({ ok: true });
+});
+app.post('/api/setup', async (c) => {
+  const x = z
+    .object({ token: z.string().regex(/^[a-f0-9]{64}$/), password: z.string().min(12).max(200) })
+    .parse(await c.req.json());
+  const tokenHash = Array.from(
+    new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(x.token))),
+  )
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+  const db = c.get('db');
+  const [valid] = await db.query(
+    'SELECT id FROM account_setup_tokens WHERE business_id=$1 AND token_hash=$2 AND used_at IS NULL AND expires_at>now()',
+    [c.env.BUSINESS_ID, tokenHash],
+  );
+  if (!valid) return c.json({ error: 'Tautan aktivasi sudah dipakai atau kedaluwarsa.' }, 400);
+  const hash = await hashPassword(x.password);
+  const [r] = await db.query(
+    `WITH token AS(UPDATE account_setup_tokens SET used_at=now() WHERE business_id=$1 AND token_hash=$2 AND used_at IS NULL AND expires_at>now() RETURNING user_id), changed AS(UPDATE users SET password_hash=$3 WHERE id IN(SELECT user_id FROM token) RETURNING id), audit AS(INSERT INTO audit_logs(business_id,actor_id,action,entity_type,entity_id) SELECT $1,id,'ACTIVATE_OWNER','user',id::text FROM changed) SELECT id FROM changed`,
+    [c.env.BUSINESS_ID, tokenHash, hash],
+  );
+  if (!r) return c.json({ error: 'Tautan aktivasi tidak berlaku.' }, 400);
   return c.json({ ok: true });
 });
 app.post('/api/logout', (c) => {

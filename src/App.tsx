@@ -1346,6 +1346,10 @@ export default function App() {
   );
 }
 function Login({ error, onLogin }: { error: string; onLogin: () => Promise<void> }) {
+  const [activation, setActivation] = useState(
+    () => new URLSearchParams(window.location.hash.slice(1)).get('activate') ?? '',
+  );
+  const [activated, setActivated] = useState(false);
   return (
     <div className="login-page">
       <section className="login-art">
@@ -1378,37 +1382,79 @@ function Login({ error, onLogin }: { error: string; onLogin: () => Promise<void>
       <section className="login-form">
         <div>
           <span className="eyebrow">SELAMAT DATANG KEMBALI</span>
-          <h2>Masuk ke ruang kerja</h2>
-          <p>Gunakan akun toko untuk melanjutkan.</p>
+          <h2>{activation ? 'Buat kata sandi pemilik' : 'Masuk ke ruang kerja'}</h2>
+          <p>
+            {activation
+              ? 'Aktifkan akun pemilik dengan kata sandi pilihanmu.'
+              : 'Gunakan akun toko untuk melanjutkan.'}
+          </p>
+          {activated && (
+            <div className="alert success">
+              Akun aktif. Masuk menggunakan email pemilik dan kata sandi yang baru dibuat.
+            </div>
+          )}
           {error && !error.includes('masuk kembali') && (
             <div className="alert warning">{error}</div>
           )}
-          <Form
-            submit="Masuk ke New System"
-            onSubmit={async (f) => {
-              await api('/login', { email: f.get('email'), password: f.get('password') });
-              await onLogin();
-            }}
-          >
-            <Field label="Email">
-              <input
-                name="email"
-                type="email"
-                placeholder="nama@toko.com"
-                autoComplete="username"
-                required
-              />
-            </Field>
-            <Field label="Kata sandi">
-              <input
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                placeholder="Masukkan kata sandi"
-                required
-              />
-            </Field>
-          </Form>
+          {activation ? (
+            <Form
+              submit="Aktifkan akun pemilik"
+              onSubmit={async (f) => {
+                if (f.get('password') !== f.get('confirm'))
+                  throw Error('Konfirmasi kata sandi belum sama.');
+                await api('/setup', { token: activation, password: f.get('password') });
+                window.history.replaceState(null, '', window.location.pathname);
+                setActivation('');
+                setActivated(true);
+              }}
+            >
+              <Field label="Kata sandi baru (minimal 12 karakter)">
+                <input
+                  name="password"
+                  type="password"
+                  minLength={12}
+                  autoComplete="new-password"
+                  required
+                />
+              </Field>
+              <Field label="Ulangi kata sandi baru">
+                <input
+                  name="confirm"
+                  type="password"
+                  minLength={12}
+                  autoComplete="new-password"
+                  required
+                />
+              </Field>
+            </Form>
+          ) : (
+            <Form
+              submit="Masuk ke New System"
+              onSubmit={async (f) => {
+                await api('/login', { email: f.get('email'), password: f.get('password') });
+                await onLogin();
+              }}
+            >
+              <Field label="Email">
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="nama@toko.com"
+                  autoComplete="username"
+                  required
+                />
+              </Field>
+              <Field label="Kata sandi">
+                <input
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  placeholder="Masukkan kata sandi"
+                  required
+                />
+              </Field>
+            </Form>
+          )}
           <div className="login-foot">
             <ShieldCheck size={16} /> Akses sesuai peran. Data toko tetap terlindungi.
           </div>

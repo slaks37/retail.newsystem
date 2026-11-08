@@ -11,9 +11,12 @@
 - Browser Chromium lokal: login, sepuluh halaman navigasi, analisis dan penyimpanan tag, layar scan manual, layout desktop dan ponsel, serta pemeriksaan error JavaScript/overflow.
 - Tesseract.js benar-benar dijalankan di browser pada foto nota supplier yang disediakan; output mentah dan status review diperiksa. Ini bukan bukti ekstraksi seluruh kolom sudah akurat.
 
+- Deployment Cloudflare benar-benar diuji dengan Neon: login, 241 produk sumber, 465 baris sumber, analisis tersimpan, dan OCR foto nota asli menghasilkan teks tanpa pelanggaran CSP atau overflow ponsel.
+- Konkurensi Neon pada bisnis validasi teknis terpisah: 5 permintaan penjualan bersamaan menghasilkan 1 penjualan sukses dan 4 penolakan stok kurang; 5 retry penerimaan menghasilkan 1 penerimaan unik. Data bisnis operasional tidak dipakai untuk transaksi uji.
+- Aktivasi pemilik sekali pakai, kedaluwarsa, dan perubahan password diuji pada API.
+
 ## Masih perlu validasi operasional
 
-- Deployment pada database Neon dan domain Cloudflare yang benar-benar terhubung, termasuk uji konkurensi beberapa koneksi database.
 - Foto nota nyata berisi 20 produk dari perangkat toko, bukan hanya parser 20 baris sintetis.
 - Kamera/perizinan pada perangkat iOS/Android toko, memori perangkat rendah, pembatalan saat inisialisasi, dan pemulihan cache OCR setelah browser ditutup.
 - Dokumen supplier di luar template yang telah dicoba serta OCR PDF gambar yang sulit atau terlipat/miring.
