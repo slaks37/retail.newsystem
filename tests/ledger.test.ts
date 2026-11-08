@@ -572,4 +572,13 @@ describe.sequential('Batas transaksi PostgreSQL', () => {
     );
     expect(response.status).toBe(400);
   });
+  it('tag fakta transaksi langsung tercatat tanpa menunggu analisis', async () => {
+    const p = await product(2);
+    const { result } = await post('SALE', [line(p, 1)], { payment_method: 'cash', tendered: 150 });
+    const [t] = await query<{ tag: string }>(
+      "SELECT tag FROM tags WHERE business_id=$1 AND entity_type='operation' AND entity_id=$2 AND source='rule'",
+      [b, result.id],
+    );
+    expect(t.tag).toBe('TRANSAKSI_SALE');
+  });
 });
