@@ -7,6 +7,7 @@
 - Parser rupiah/desimal, separator ambigu, kesalahan O/0 dan I/1, tanggal tidak valid, total tidak sesuai, baris berulang, dan 20 baris produk sintetis.
 - Template kolom Astra (HET, diskon dasar, HARGA, potongan) dan Mataram (jumlah pada sisi kiri). Contoh uji di repository menggunakan data sintetis.
 - Fungsi PostgreSQL pada PGlite: saldo awal, penerimaan produk lama berulang, stok kurang, rollback seluruh keranjang, idempotensi, kunci dengan isi berbeda, konversi kemasan, fisik parsial/rusak, total nota berbeda, pembayaran sebagian, retur, izin peran, scope bisnis, ledger immutable, impor sumber idempoten, dan analisis berulang.
+- Alur browser ujung ke ujung: membuat produk, menerima produk lama dua kali tanpa duplikasi, mengubah harga jual, transaksi POS yang mengurangi stok, opname jumlah fisik, serta pembayaran supplier sebagian.
 - Browser Chromium lokal: login, sepuluh halaman navigasi, analisis dan penyimpanan tag, layar scan manual, layout desktop dan ponsel, serta pemeriksaan error JavaScript/overflow.
 - Tesseract.js benar-benar dijalankan di browser pada foto nota supplier yang disediakan; output mentah dan status review diperiksa. Ini bukan bukti ekstraksi seluruh kolom sudah akurat.
 

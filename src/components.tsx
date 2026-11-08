@@ -1,4 +1,12 @@
-import { useState, type ReactNode, type FormEvent } from 'react';
+import {
+  useState,
+  useId,
+  Children,
+  isValidElement,
+  cloneElement,
+  type ReactNode,
+  type FormEvent,
+} from 'react';
 import {
   X,
   Search,
@@ -78,12 +86,26 @@ export function Field({
   children: ReactNode;
   hint?: string;
 }) {
+  const id = useId();
+  let assigned = false;
+  const controls = Children.map(children, (child) => {
+    if (
+      !assigned &&
+      isValidElement<{ id?: string; type?: string; 'aria-describedby'?: string }>(child) &&
+      ['input', 'select', 'textarea'].includes(String(child.type)) &&
+      child.props.type !== 'hidden'
+    ) {
+      assigned = true;
+      return cloneElement(child, { id, 'aria-describedby': hint ? id + '-hint' : undefined });
+    }
+    return child;
+  });
   return (
-    <label className="field">
-      <span>{label}</span>
-      {children}
-      {hint && <small>{hint}</small>}
-    </label>
+    <div className="field">
+      <label htmlFor={id}>{label}</label>
+      {controls}
+      {hint && <small id={id + '-hint'}>{hint}</small>}
+    </div>
   );
 }
 export function Empty({

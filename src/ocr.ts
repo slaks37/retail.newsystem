@@ -176,6 +176,8 @@ export async function processDocuments(
     assert();
     result.hash = await hash(new TextEncoder().encode(hashes.join('|')).buffer);
     result.text = result.pages.map((p) => p.text).join('\n\n');
+    if (result.text.replace(/\s/g, '').length < 3)
+      throw Error('Teks belum terbaca. Perbaiki foto atau gunakan input manual.');
     await set('ocr:' + result.hash, result);
     onProgress({
       stage: 'Menganalisis baris nota',

@@ -1204,7 +1204,7 @@ td strong {
   text-align: left;
   min-width: 0;
 }
-.field > span {
+.field > label {
   font-size: 10px;
   color: #67785f;
   font-weight: 500;
@@ -1883,7 +1883,7 @@ td strong {
   padding-bottom: 2px;
   margin-bottom: 18px;
 }
-.review-panel .field > span {
+.review-panel .field > label {
   font-size: 9px;
 }
 .review-panel input,
@@ -2092,7 +2092,7 @@ td strong {
 .image-controls .field {
   margin-bottom: 12px;
 }
-.image-controls .field > span {
+.image-controls .field > label {
   font-size: 9px;
 }
 .image-controls > small {
@@ -2344,7 +2344,7 @@ td strong {
 .cart-summary .field {
   margin-bottom: 15px;
 }
-.cart-summary .field > span {
+.cart-summary .field > label {
   font-size: 10px;
   color: #67785f;
 }
@@ -3014,8 +3014,8 @@ td {
   font-size: 10px;
   color: #6b7e60;
 }
-.field > span,
-.review-panel .field > span {
+.field > label,
+.review-panel .field > label {
   font-size: 11px;
   color: #5e7454;
 }
@@ -3064,7 +3064,7 @@ td {
   font-size: 12px;
   color: #44673d;
 }
-.review-line .field > span {
+.review-line .field > label {
   font-size: 10px;
 }
 .line-actions .text-button {

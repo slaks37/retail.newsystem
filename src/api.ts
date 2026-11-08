@@ -13,7 +13,7 @@ export const rupiah = (n: unknown) =>
   new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
-    maximumFractionDigits: 0,
+    maximumFractionDigits: 2,
   }).format(Number(n ?? 0));
 export const quantity = (n: unknown) =>
   new Intl.NumberFormat('id-ID', { maximumFractionDigits: 4 }).format(Number(n ?? 0));
